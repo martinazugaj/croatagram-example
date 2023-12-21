@@ -1,0 +1,14 @@
+.c-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 16px;
+
+  &__title {
+    color: aquamarine;
+  }
+
+  &__subtitle {
+    color: antiquewhite;
+  }
+}

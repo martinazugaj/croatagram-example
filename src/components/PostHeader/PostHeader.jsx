@@ -1,12 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import "./PostHeader.scss";
 import PropTypes from "prop-types";
 
-function PostHeader({ nickname, location, avatar_url }) {
+function PostHeader({ nickname, location, avatar_url, user_id }) {
+  const navigate = useNavigate();
+
+  const openProfile = () => {
+    navigate(`/profile/${user_id}`);
+  };
+
   return (
     <div className="c-post-header">
       <img src={avatar_url} width={64}></img>
       <div className="c-post-header__text">
-        <p className="c-post-header__text--main">{nickname}</p>
+        <p className="c-post-header__text--main" onClick={openProfile}>
+          {nickname}
+        </p>
         <p className="c-post-header__text--secondary">{location}</p>
       </div>
     </div>
@@ -17,6 +26,7 @@ PostHeader.propTypes = {
   nickname: PropTypes.string,
   location: PropTypes.string,
   avatar_url: PropTypes.string,
+  user_id: PropTypes.number,
 };
 
 PostHeader.defaultProps = {

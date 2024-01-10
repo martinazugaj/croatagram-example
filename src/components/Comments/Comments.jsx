@@ -1,5 +1,6 @@
 import React from "react";
 import "./Comments.scss";
+import { Link } from "react-router-dom";
 
 class Comments extends React.Component {
   state = {
@@ -66,6 +67,7 @@ class Comments extends React.Component {
             <button disabled={!this.state.comment} onClick={this.addComment}>
               Comment
             </button>
+            <Link to={"/comments"}>Show all</Link>
           </div>
           <div>
             {!comments.length ? (

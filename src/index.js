@@ -1,13 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Profile from "./components/Profile/Profile";
+import CommentsList from "./components/CommentsList/CommentsList";
+import SingleComment from "./components/SingleComment/SingleComment";
+import SinglePost from "./components/SinglePost/SinglePost";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const router = createBrowserRouter([
+  { path: "/", element: <App /> },
+  { path: "/profile/:id", element: <Profile /> },
+  { path: "/comments", element: <CommentsList /> },
+  { path: "/comments/:id", element: <SingleComment /> },
+  {
+    path: "/comments/:id/:postId",
+    element: <SinglePost />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

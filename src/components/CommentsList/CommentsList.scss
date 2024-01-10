@@ -1,0 +1,15 @@
+.c-comments-list {
+  padding: 16px;
+  margin: 16px;
+  border: 1px solid black;
+  border-radius: 8px;
+
+  &__item {
+    margin: 8px;
+
+    &:hover {
+      color: blue;
+      cursor: pointer;
+    }
+  }
+}

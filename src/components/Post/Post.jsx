@@ -11,8 +11,9 @@ function Post({ post }) {
         nickname={post.user_nickname}
         location={post.user_location}
         avatar_url={post.user_image}
+        user_id={post.userId}
       />
-      <PostMain image_src={post.src} image_caption={post.caption} />
+      <PostMain image_src={post.src} image_caption={post.title} />
       <PostFooter no_of_likes={post.likes} />
       <Comments />
     </div>

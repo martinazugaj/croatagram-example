@@ -2,6 +2,7 @@ import PostHeader from "../PostHeader/PostHeader";
 import PostMain from "../PostMain/PostMain";
 import PostFooter from "../PostFooter/PostFooter";
 import "./Post.scss";
+import Comments from "../Comments/Comments";
 
 function Post({ post }) {
   return (
@@ -13,6 +14,7 @@ function Post({ post }) {
       />
       <PostMain image_src={post.src} image_caption={post.caption} />
       <PostFooter no_of_likes={post.likes} />
+      <Comments />
     </div>
   );
 }

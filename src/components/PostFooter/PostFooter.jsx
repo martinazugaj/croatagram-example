@@ -1,7 +1,6 @@
-import { useState } from "react";
 import "./PostFooter.scss";
 import PropTypes from "prop-types";
-import Comments from "../Comments/Comments";
+import { useState } from "react";
 
 function PostFooter({ no_of_likes }) {
   const [likes, setLikes] = useState(no_of_likes);
@@ -42,9 +41,6 @@ function PostFooter({ no_of_likes }) {
         </svg>
       </div>
       <span className="c-post-footer__counter">{likes}</span>
-      <span className="c-post-footer__comments">
-        <Comments />
-      </span>
     </div>
   );
 }

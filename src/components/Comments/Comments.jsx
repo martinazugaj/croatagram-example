@@ -1,42 +1,90 @@
-//napraviti novu klasnu komponentu, imat ce svoj state
-//input u koji upisujemo tekst, klikom na button generira se lista komentara
 import React from "react";
-import CommentItem from "../CommentItem/CommentItem";
+import "./Comments.scss";
 
 class Comments extends React.Component {
-  state = { comment: [], newItem: "" };
-
-  setNewItem = (e) => {
-    this.setState({ newItem: e.target.value });
+  state = {
+    comments: [],
+    comment: "",
   };
 
-  addNewItem = () => {
-    if (this.state.newItem === "") return;
-    let { comment } = this.state;
-    comment.push(this.state.newItem);
-    this.setState({
-      comment: comment,
-      newItem: "",
-    });
+  addComment = () => {
+    if (this.state.comments.length === 0) {
+      const comment = {
+        text: this.state.comment,
+        avatar: this.avatars[this.randomIndex(0, this.avatars.length)],
+        username: this.usernames[this.randomIndex(0, this.usernames.length)],
+      };
+      this.setState({
+        comments: [comment],
+      });
+    } else {
+      const { comments } = this.state;
+      const comment = {
+        text: this.state.comment,
+        avatar: this.avatars[this.randomIndex(0, this.avatars.length)],
+        username: this.usernames[this.randomIndex(0, this.usernames.length)],
+      };
+      this.setState({
+        comments: [...comments, comment],
+      });
+    }
+    this.setState({ comment: "" });
   };
+
+  randomIndex = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  avatars = [
+    "https://thumbs.dreamstime.com/b/flat-male-avatar-image-beard-hairstyle-businessman-profile-icon-vector-179285629.jpg",
+    "https://img.freepik.com/premium-vector/avatar-icon001_750950-50.jpg",
+  ];
+
+  usernames = [
+    "londoner324",
+    "berliner436563",
+    "nonameuser1",
+    "randomuser345",
+    "nameuser2",
+  ];
 
   render() {
-    const { comment } = this.state;
+    const { comments } = this.state;
 
     return (
       <>
-        <div>
-          <input
-            value={this.state.newItem}
-            onChange={(e) => this.setNewItem(e)}
-          ></input>
-          <button onClick={this.addNewItem}>Add comment</button>
+        <div className="c-comments">
+          <div>
+            <input
+              placeholder="Enter your comment"
+              type="text"
+              value={this.state.comment}
+              onChange={(e) => this.setState({ comment: e.target.value })}
+            />
+            <button disabled={!this.state.comment} onClick={this.addComment}>
+              Comment
+            </button>
+          </div>
+          <div>
+            {!comments.length ? (
+              <p>No comments</p>
+            ) : (
+              comments.map((comment, index) => {
+                return (
+                  <div key={index} className="c-comments__item">
+                    <img height={36} width={36} src={comment.avatar}></img>
+                    <span className="c-comments__item__text">
+                      {comment.username}
+                    </span>
+                    <span>{comment.text}</span>
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
-        {comment.length === 0 ? (
-          <p>No comments.</p>
-        ) : (
-          comment.map((c) => <CommentItem comment={c} />)
-        )}
       </>
     );
   }
